@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "serve": "npx firebase serve",
     "deploy": "npx firebase deploy"
   },
@@ -18,8 +19,18 @@
   },
   "homepage": "https://github.com/otchy210/ukbt-scouter#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
     "firebase": "^8.4.2",
     "firebase-cli": "^1.2.0",
-    "firebase-tools": "^9.10.0"
+    "firebase-tools": "^9.10.0",
+    "webpack": "^5.36.1",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
