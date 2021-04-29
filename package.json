@@ -1,0 +1,22 @@
+{
+  "name": "ukbt-scouter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otchy210/ukbt-scouter.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/otchy210/ukbt-scouter/issues"
+  },
+  "homepage": "https://github.com/otchy210/ukbt-scouter#readme",
+  "devDependencies": {
+    "firebase": "^8.4.2",
+    "firebase-cli": "^1.2.0",
+    "firebase-tools": "^9.10.0"
+  }
+}
