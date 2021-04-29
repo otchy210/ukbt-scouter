@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "serve": "npx firebase serve",
+    "deploy": "npx firebase deploy"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/otchy210/ukbt-scouter.git"
