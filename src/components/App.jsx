@@ -24,7 +24,7 @@ const App = (props) => {
                 }
                 const file = fileInput.files[0];
                 const fileName = file.name;
-                storage.ref(fileName).put(file).then((result) => {
+                storage.ref(`screenshots/${fileName}`).put(file).then((result) => {
                     console.log('file uploaded', result);
                 });
             }} />
