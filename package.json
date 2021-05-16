@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
-    "firebase": "^8.4.2",
+    "firebase": "^8.6.1",
     "firebase-cli": "^1.2.0",
     "firebase-tools": "^9.10.0",
     "react-router-dom": "^5.2.0",

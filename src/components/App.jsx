@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { useDatabase } from './libs/Firebase.js';
 import About from './pages/About.jsx';
 import Home from './pages/Home.jsx';
 import List from './pages/List.jsx';
@@ -8,7 +9,12 @@ import NotFound from './pages/NotFound.jsx';
 import Ranking from './pages/Ranking.jsx';
 import Record from './pages/Record.jsx';
 
-const App = (props) => {
+const App = () => {
+    const database = useDatabase();
+    const root = database.ref();
+    root.get().then(data => {
+        console.log(data.val());
+    });
     return <BrowserRouter>
         <header class="sticky">
             <Link to="/" className="button"><span class="icon-home"></span></Link>
@@ -49,17 +55,6 @@ const App = (props) => {
     // const {db, storage} = props;
     // const fileRef = useRef();
     // return <div>
-    //     <button onClick={() => {
-    //         const now = Date.now();
-    //         const ref = db.ref('now');
-    //         ref.set({now}, (error) => {
-    //             if (error) {
-    //                 console.error('something wrong', error);
-    //             } else {
-    //                 console.log('now is updated');
-    //             }
-    //         });
-    //     }}>set now</button>
     //     <label style={{display: 'block', cursor: 'pointer'}}>
     //         Upload
     //         <input type="file" ref={fileRef} style={{display: 'none'}} onChange={() => {
