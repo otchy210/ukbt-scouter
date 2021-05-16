@@ -1,25 +1,28 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import Home from './Home.jsx';
-import List from './List.jsx';
-import New from './New.jsx';
-import NotFound from './NotFound.jsx';
-import Record from './Record.jsx';
+import Home from './pages/Home.jsx';
+import List from './pages/List.jsx';
+import New from './pages/New.jsx';
+import NotFound from './pages/NotFound.jsx';
+import Ranking from './pages/Ranking.jsx';
+import Record from './pages/Record.jsx';
 
 const App = (props) => {
     return <BrowserRouter>
-        <header>
-            <h1>スカウターチャレンジ<small>うかボツ非公認イベント</small></h1>
+        <header class="sticky">
+            <Link to="/" className="button">ホーム</Link>
+            <Link to="/ranking" className="button">ランキング</Link>
+            <Link to="/list" className="button">一覧</Link>
         </header>
-        <nav>
-            <Link to="/">Home</Link> | <Link to="/list">List</Link>
-        </nav>
         <Switch>
             <Route exact path="/">
                 <Home />
             </Route>
             <Route path="/new">
                 <New />
+            </Route>
+            <Route path="/ranking">
+                <Ranking />
             </Route>
             <Route path="/list">
                 <List />
@@ -31,8 +34,8 @@ const App = (props) => {
                 <NotFound />
             </Route>
         </Switch>
-        <footer>
-            presended by <a href="https://twitter.com/otchy" target="_blank">Otchy</a>
+        <footer class="sticky">
+            <p>presended by <a href="https://twitter.com/otchy" target="_blank">Otchy</a></p>
         </footer>
     </BrowserRouter>
     // const {db, storage} = props;

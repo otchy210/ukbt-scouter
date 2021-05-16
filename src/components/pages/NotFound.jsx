@@ -3,9 +3,9 @@ import { useLocation } from 'react-router';
 
 const NotFound = () => {
     const { pathname } = useLocation();
-    return <div>
-        { pathname } は無効な URL です。
-    </div>
+    return <p>
+        <mark class="inline-block secondary">{ pathname } は無効な URL です。</mark>
+    </p>
 };
 
 export default NotFound;
