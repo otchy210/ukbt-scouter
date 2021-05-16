@@ -40,13 +40,13 @@ const Home = () => {
                 <thead>
                     <tr>
                         <th>ターゲット</th>
-                        <th>締切日時</th>
+                        <th>終了期限</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td data-label="ターゲット">{meta.target}</td>
-                        <td data-label="締切日時">{meta.dueDate}</td>
+                        <td data-label="終了期限">{meta.dueDate}</td>
                     </tr>
                 </tbody>
             </table>
