@@ -1,39 +1,74 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../blocks/Loading.jsx';
 import Records from '../blocks/Records.jsx';
+import { useMeta, useRanking, useRecent } from '../libs/Database.js';
 
 const Home = () => {
+    const [meta, setMeta] = useState();
+    const [recent, setRecent] = useState();
+    const [ranking, setRanking] = useState();
+
+    useEffect(async () => {
+        const meta = await useMeta();
+        setMeta(meta);
+    }, []);
+
+    useEffect(async () => {
+        const recent = await useRecent();
+        setRecent(recent);
+    }, []);
+
+    useEffect(async () => {
+        const ranking = await useRanking();
+        setRanking(ranking);
+    }, []);
+
+    if (!meta) {
+        return <Loading />
+    }
     return <>
         <h1>スカウターチャレンジ</h1>
-        <table>
-            <caption>第 n 回開催中！</caption>
-            <thead>
-                <tr>
-                    <th>ターゲット</th>
-                    <th>締切日時</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="ターゲット">530000</td>
-                    <td data-label="締切日時">yyyy-mm-dd 23:59:59</td>
-                </tr>
-            </tbody>
-        </table>
+        {meta.isExpired &&
+            <p>
+                第 {meta.round} 回の募集は終了しました。
+            </p>
+        }
+        {!meta.isExpired &&
+            <table>
+                <caption>第 {meta.round} 回開催中！</caption>
+                <thead>
+                    <tr>
+                        <th>ターゲット</th>
+                        <th>締切日時</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="ターゲット">{meta.target}</td>
+                        <td data-label="締切日時">{meta.dueDate}</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
         <h2>最新の 3 件</h2>
-        <Records/>
+        {!recent && <Loading />}
+        {recent && <Records records={recent}/>}
         <p>
             <Link to="/list">全てのスクショを見る</Link>
         </p>
         <h2>トップ 3</h2>
-        <Records/>
+        {!ranking && <Loading />}
+        {ranking && <Records records={ranking}/>}
         <p>
-            <Link to="/ranking">トップ 10 を見る</Link>
+            <Link to="/ranking">全てのランキングを見る</Link>
         </p>
-        <h2>新規登録</h2>
-        <p>
-            <Link to="/new" class="button primary">スクショをアップロード</Link>
-        </p>
+        {!meta.isExpired && <>
+            <h2>新規登録</h2>
+            <p>
+                <Link to="/new" class="button primary">スクショをアップロード</Link>
+            </p>
+        </>}
     </>
 };
 

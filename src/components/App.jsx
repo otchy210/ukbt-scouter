@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { useDatabase } from './libs/Firebase.js';
 import About from './pages/About.jsx';
 import Home from './pages/Home.jsx';
 import List from './pages/List.jsx';
@@ -10,11 +9,6 @@ import Ranking from './pages/Ranking.jsx';
 import Record from './pages/Record.jsx';
 
 const App = () => {
-    const database = useDatabase();
-    const root = database.ref();
-    root.get().then(data => {
-        console.log(data.val());
-    });
     return <BrowserRouter>
         <header class="sticky">
             <Link to="/" className="button"><span class="icon-home"></span></Link>
@@ -35,7 +29,7 @@ const App = () => {
             <Route path="/ranking">
                 <Ranking />
             </Route>
-            <Route path="/record/:recordId">
+            <Route path="/record/:recordKey">
                 <Record />
             </Route>
             <Route path="/about">

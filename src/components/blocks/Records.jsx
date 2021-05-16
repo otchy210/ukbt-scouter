@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { formatTime } from '../libs/Date';
 
-const Records = () => {
+const Records = ({ records }) => {
     return <ul>
-        <li><Link to="/record/1">record 1</Link></li>
-        <li><Link to="/record/2">record 2</Link></li>
-        <li><Link to="/record/3">record 3</Link></li>
+        {records.map(record => {
+            return <li>
+                <Link to={`/record/${record.key}`}>{record.name} さん ({formatTime(record.ts)})</Link>
+            </li>
+        })}
     </ul>
 };
 
