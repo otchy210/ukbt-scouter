@@ -27,7 +27,6 @@
     "firebase-cli": "^1.2.0",
     "firebase-tools": "^9.10.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.3.0",
     "webpack": "^5.36.1",
     "webpack-cli": "^4.6.0"
   },
