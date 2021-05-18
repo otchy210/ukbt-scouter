@@ -46,24 +46,6 @@ const App = () => {
             </p>
         </footer>
     </BrowserRouter>
-    // const {db, storage} = props;
-    // const fileRef = useRef();
-    // return <div>
-    //     <label style={{display: 'block', cursor: 'pointer'}}>
-    //         Upload
-    //         <input type="file" ref={fileRef} style={{display: 'none'}} onChange={() => {
-    //             const fileInput = fileRef.current;
-    //             if (fileInput.files.length === 0) {
-    //                 return;
-    //             }
-    //             const file = fileInput.files[0];
-    //             const fileName = file.name;
-    //             storage.ref(`screenshots/${fileName}`).put(file).then((result) => {
-    //                 console.log('file uploaded', result);
-    //             });
-    //         }} />
-    //     </label>
-    // </div>;
 }
 
 export default App;

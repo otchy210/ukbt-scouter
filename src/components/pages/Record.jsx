@@ -40,7 +40,7 @@ const Record = () => {
         </p>
         <p style={{textAlign: 'center'}}>
             <img
-                src={`https://storage.googleapis.com/ukbt-scouter.appspot.com/screenshots/r${meta.round}/${record.key}.png`}
+                src={`https://storage.googleapis.com/ukbt-scouter.appspot.com/screenshots/r${meta.round}/${record.key}`}
                 style={{
                     width: '100%',
                     maxWidth: '480px'
