@@ -53,13 +53,13 @@ const Home = () => {
         }
         <h2>最新の 3 件</h2>
         {!recent && <Loading />}
-        {recent && <Records records={recent}/>}
+        {recent && <Records records={recent} limit={3}/>}
         <p>
             <Link to="/list">全てのスクショを見る</Link>
         </p>
         <h2>トップ 3</h2>
         {!ranking && <Loading />}
-        {ranking && <Records records={ranking}/>}
+        {ranking && <Records records={ranking} limit={3}/>}
         <p>
             <Link to="/ranking">全てのランキングを見る</Link>
         </p>
