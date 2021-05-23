@@ -74,7 +74,7 @@ const New = () => {
         });
         const recentRef = database.ref('current/recent');
         const recentSnap = await recentRef.get();
-        const recent = recentSnap.val();
+        const recent = recentSnap.val() ?? [];
         recent.unshift(key);
         await recentRef.set(recent);
 

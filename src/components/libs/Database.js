@@ -24,6 +24,9 @@ const useRecords = async (refPath) => {
     const recordsRef = database.ref(refPath);
     const recordsSnap = await recordsRef.get();
     const keys = recordsSnap.val();
+    if (!keys) {
+        return [];
+    }
 
     const queries = [];
     for (const key of keys) {
