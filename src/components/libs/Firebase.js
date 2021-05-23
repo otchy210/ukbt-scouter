@@ -49,18 +49,25 @@ const useAuth = () => {
     return auth;
 };
 
-const newGoogleAuthProvider = (scopes = ['https://www.googleapis.com/auth/contacts.readonly']) => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    for (const scope of scopes) {
-        provider.addScope(scope);
+const tryLogin = async () => {
+    const auth = useAuth();
+    if (auth.currentUser) {
+        return auth.currentUser;
     }
-    return provider;
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    const result = await auth.signInWithPopup(provider);
+    return result.user;
 };
+
+const isAdminLoggedIn = async () => {
+    const user = await tryLogin();
+    return user && user.email === 'otchy210@gmail.com';
+}
 
 export {
     useApp,
     useDatabase,
     useStorage,
-    useAuth,
-    newGoogleAuthProvider,
+    isAdminLoggedIn
 };

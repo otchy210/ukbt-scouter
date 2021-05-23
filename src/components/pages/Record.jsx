@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import Loading from '../blocks/Loading.jsx';
 import { useMeta, useRecord } from '../libs/Database.js';
 import { formatTime } from '../libs/Date.js';
-import { newGoogleAuthProvider, useAuth, useDatabase } from '../libs/Firebase.js';
+import { isAdminLoggedIn, useDatabase } from '../libs/Firebase.js';
 import NotFound from './NotFound.jsx';
 
 const Record = () => {
@@ -31,19 +31,8 @@ const Record = () => {
         return <NotFound />;
     }
 
-    const tryLogin = async () => {
-        const auth = useAuth();
-        if (auth.currentUser) {
-            return auth.currentUser;
-        }
-        const provider = newGoogleAuthProvider();
-        const result = await auth.signInWithPopup(provider);
-        return result.user;
-    }
-
     const tryEdit = async () => {
-        const user = await tryLogin();
-        if (!user || user.email !== 'otchy210@gmail.com') {
+        if (!isAdminLoggedIn()) {
             return;
         }
         const scoreStr = prompt('score?', record.score ?? '');
