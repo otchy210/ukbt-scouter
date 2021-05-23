@@ -17,7 +17,7 @@ const Ranking = () => {
 
 return <>
         <h1>ランキング</h1>
-        <Records records={ranking} pagination={true} />
+        <Records records={ranking} mode="score" pagination={true} />
     </>
 };
 

@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/database';
+import 'firebase/auth';
 
 const config = {
     apiKey: 'AIzaSyB1aWYo-n_Yhf6e7RNgDXLcGqVAjFcWsiI',
@@ -37,10 +38,29 @@ const useDatabase = () => {
         database = app.database();
     }
     return database;
-}
+};
+
+let auth;
+const useAuth = () => {
+    if (!auth) {
+        const app = useApp();
+        auth = app.auth();
+    }
+    return auth;
+};
+
+const newGoogleAuthProvider = (scopes = ['https://www.googleapis.com/auth/contacts.readonly']) => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    for (const scope of scopes) {
+        provider.addScope(scope);
+    }
+    return provider;
+};
 
 export {
     useApp,
     useDatabase,
-    useStorage
+    useStorage,
+    useAuth,
+    newGoogleAuthProvider,
 };

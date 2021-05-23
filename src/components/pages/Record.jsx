@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import Loading from '../blocks/Loading.jsx';
 import { useMeta, useRecord } from '../libs/Database.js';
 import { formatTime } from '../libs/Date.js';
+import { newGoogleAuthProvider, useAuth, useDatabase } from '../libs/Firebase.js';
 import NotFound from './NotFound.jsx';
 
 const Record = () => {
@@ -29,11 +30,39 @@ const Record = () => {
     } else if (status === 'notFound') {
         return <NotFound />;
     }
+
+    const tryLogin = async () => {
+        const auth = useAuth();
+        if (auth.currentUser) {
+            return auth.currentUser;
+        }
+        const provider = newGoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+        return result.user;
+    }
+
+    const tryEdit = async () => {
+        const user = await tryLogin();
+        if (!user || user.email !== 'otchy210@gmail.com') {
+            return;
+        }
+        const scoreStr = prompt('score?', record.score ?? '');
+        const score = parseInt(scoreStr);
+        const storedRecord = await useRecord(recordKey);
+        const newRecord = {
+            ...storedRecord,
+            score
+        };
+        const database = useDatabase();
+        await database.ref(`current/records/${recordKey}`).set(newRecord);
+        setRecord(newRecord);
+    };
+
     const diff = record.score - meta.target;
     return <>
         <h1>
-            {record.name} さん
-            {record.score && <small>戦闘力: {record.score} ({diff > 0 ? `+${diff}` : diff})</small>}
+            <span onDoubleClick={tryEdit}>{record.name}</span> さん
+            {record.score && <small>戦闘力: {record.score} [{diff > 0 ? `+${diff}` : diff}]</small>}
         </h1>
         <p>
             <i>{formatTime(record.ts)}</i>

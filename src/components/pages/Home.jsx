@@ -59,7 +59,7 @@ const Home = () => {
         </p>
         <h2>トップ 3</h2>
         {!ranking && <Loading />}
-        {ranking && <Records records={ranking} limit={3}/>}
+        {ranking && <Records records={ranking} mode="score" limit={3}/>}
         <p>
             <Link to="/ranking">全てのランキングを見る</Link>
         </p>

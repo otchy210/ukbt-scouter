@@ -2,8 +2,19 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { formatTime } from '../libs/Date';
 
+const getMeta = (record, mode) => {
+    switch (mode) {
+        case 'ts':
+            return formatTime(record.ts);
+        case 'score':
+            return record.score ?? formatTime(record.ts);
+    }
+    return '-';
+}
+
 const Records = (props) => {
     const records = props.records;
+    const mode = props.mode ?? 'ts';
     const limit = props.limit ?? 10;
     const query = new URLSearchParams(useLocation().search);
     const page = parseInt(query.get('p') ?? 1);
@@ -17,7 +28,7 @@ const Records = (props) => {
         <ul>
             {records.slice(offset, offset + limit).map(record => {
                 return <li>
-                    <Link to={`/record/${record.key}`}>{record.name} さん ({formatTime(record.ts)})</Link>
+                    <Link to={`/record/${record.key}`}>{record.name} さん [{getMeta(record, mode)}]</Link>
                 </li>
             })}
         </ul>
